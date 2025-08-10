@@ -31,7 +31,7 @@
      :description
      "Advanced model for complex tasks; cheaper & faster than GPT-Turbo"
      :capabilities (media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 128 :input-cost 2.5 :output-cost 10 :cutoff-date "2023-10")
     (gpt-4o-copilot
      :description "Cheap model for fast tasks; cheaper & more capable than GPT-3.5 Turbo"
@@ -42,7 +42,7 @@
     (gpt-4.1
      :description "Flagship model for complex tasks"
      :capabilities (media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 128
      :input-cost 2.0
      :output-cost 8.0
@@ -50,7 +50,7 @@
     (gpt-5
      :description "Flagship model for coding, reasoning, and agentic tasks across domains"
      :capabilities (media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 128
      :input-cost 1.25
      :output-cost 10
@@ -66,7 +66,7 @@
     (o3
      :description "Well-rounded and powerful model across domains"
      :capabilities (reasoning media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 200
      :input-cost 10
      :output-cost 40
@@ -81,7 +81,7 @@
     (o4-mini
      :description "Fast, effective reasoning with efficient performance in coding and visual tasks"
      :capabilities (reasoning media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 200
      :input-cost 1.10
      :output-cost 4.40

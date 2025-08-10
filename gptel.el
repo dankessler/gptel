@@ -583,7 +583,7 @@ the same as t."
   '((gpt-4o
      :description "Advanced model for complex tasks; cheaper & faster than GPT-Turbo"
      :capabilities (media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 128
      :input-cost 2.50
      :output-cost 10
@@ -591,7 +591,7 @@ the same as t."
     (gpt-4o-mini
      :description "Cheap model for fast tasks; cheaper & more capable than GPT-3.5 Turbo"
      :capabilities (media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 128
      :input-cost 0.15
      :output-cost 0.60
@@ -599,7 +599,7 @@ the same as t."
     (gpt-4.1
      :description "Flagship model for complex tasks"
      :capabilities (media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 1024
      :input-cost 2.0
      :output-cost 8.0
@@ -607,7 +607,7 @@ the same as t."
     (gpt-4.5-preview
      :description "DEPRECATED: Use gpt-4.1 instead"
      :capabilities (media tool-use url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 128
      :input-cost 75
      :output-cost 150
@@ -615,14 +615,14 @@ the same as t."
     (gpt-4.1-mini
      :description "Balance between intelligence, speed and cost"
      :capabilities (media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 1024
      :input-cost 0.4
      :output-cost 1.6)
     (gpt-4.1-nano
      :description "Fastest, most cost-effective GPT-4.1 model"
      :capabilities (media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 1024
      :input-cost 0.10
      :output-cost 0.40
@@ -630,14 +630,14 @@ the same as t."
     (gpt-4-turbo
      :description "Previous high-intelligence model"
      :capabilities (media tool-use url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 128
      :input-cost 10
      :output-cost 30
      :cutoff-date "2023-11")
     (gpt-4
      :description "GPT-4 snapshot from June 2023 with improved function calling support"
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :capabilities (media url)
      :context-window 8.192
      :input-cost 30
@@ -646,7 +646,7 @@ the same as t."
     (gpt-5
      :description "Flagship model for coding, reasoning, and agentic tasks across domains"
      :capabilities (media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 400
      :input-cost 1.25
      :output-cost 10
@@ -654,7 +654,7 @@ the same as t."
     (gpt-5-mini
      :description "Faster, more cost-efficient version of GPT-5"
      :capabilities (media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 400
      :input-cost 0.25
      :output-cost 2.0
@@ -662,7 +662,7 @@ the same as t."
     (gpt-5-nano
      :description "Fastest, cheapest version of GPT-5"
      :capabilities (media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 400
      :input-cost 0.05
      :output-cost 0.40
@@ -670,7 +670,7 @@ the same as t."
     (o1
      :description "Reasoning model designed to solve hard problems across domains"
      :capabilities (media reasoning)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 200
      :input-cost 15
      :output-cost 60
@@ -685,7 +685,7 @@ the same as t."
     (o3
      :description "Well-rounded and powerful model across domains"
      :capabilities (reasoning media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 200
      :input-cost 2
      :output-cost 8
@@ -700,7 +700,7 @@ the same as t."
     (o4-mini
      :description "Fast, effective reasoning with efficient performance in coding and visual tasks"
      :capabilities (reasoning media tool-use json url)
-     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp")
+     :mime-types ("image/jpeg" "image/png" "image/gif" "image/webp" "application/pdf")
      :context-window 200
      :input-cost 1.10
      :output-cost 4.40
