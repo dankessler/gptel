@@ -82,9 +82,8 @@ back to the LLM)."
             (if (and reasoning (not (eq reasoning :null)))
                 (plist-put info :reasoning
                            (concat (plist-get info :reasoning) reasoning))
-              (if (eq 'in (plist-get info :reasoning-block))
-                  (plist-put info :reasoning-block t)
-                (plist-put info :reasoning-block nil)))
+              (when (eq 'in (plist-get info :reasoning-block))
+                (plist-put info :reasoning-block t)))
             (unless (eq done :json-false)
               (gptel--ollama-update-tokens content info)
               (goto-char (point-max)))))
