@@ -68,6 +68,10 @@
 
 ** New features and UI changes
 
+- xAI subscription support: SuperGrok subscribers can now authenticate with
+  OAuth and use their subscription without an API key.  See
+  =gptel-make-xai-oauth= and the README for details.
+
 - The gptel tool's =:include= slot and the global option
   ~gptel-include-tool-results~ now also accept the symbol =call=: when
   set, only the call parameters are inserted into the buffer; the result
