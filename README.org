@@ -91,6 +91,7 @@ gptel uses Curl if available, but falls back to the built-in url-retrieve to wor
       - [[#github-models][Github Models]]
       - [[#novita-ai][Novita AI]]
       - [[#xai][xAI]]
+      - [[#xai-supergrokx-premium-subscription][xAI (SuperGrok/X Premium subscription)]]
       - [[#aiml-api][AI/ML API]]
       - [[#github-copilotchat][GitHub CopilotChat]]
       - [[#aws-bedrock][AWS Bedrock]]
@@ -227,6 +228,7 @@ gptel supports a number of LLM providers:
 | Github Models        | [[https://github.com/settings/tokens][Token]]                      |
 | Novita AI            | [[https://novita.ai/model-api/product/llm-api?utm_source=github_gptel&utm_medium=github_readme&utm_campaign=link][Token]]                      |
 | xAI                  | [[https://console.x.ai?utm_source=github_gptel&utm_medium=github_readme&utm_campaign=link][API key]]                    |
+| xAI subscription     | SuperGrok/X Premium sub    |
 | GitHub CopilotChat   | GitHub account             |
 | Bedrock              | AWS credentials            |
 | Moonshot (Kimi)      | API key ([[https://platform.moonshot.cn/console][CN]] or [[https://platform.moonshot.ai/console][Global]])     |
@@ -1117,6 +1119,33 @@ The above code makes the backend available to select.  If you want it to be the 
 
 #+html: </details>
 #+html: <details><summary>
+**** xAI (SuperGrok/X Premium subscription)
+#+html: </summary>
+
+Includes access to Grok via a SuperGrok or X Premium subscription that
+includes Grok access.  Register a backend with
+
+#+begin_src emacs-lisp
+(gptel-make-xai-oauth "SuperGrok") ;Any name of your choosing
+#+end_src
+
+You will be prompted to log into xAI as required.  (You can also log in manually with =M-x gptel-xai-oauth-login=.)
+
+Refer to the documentation of =gptel-make-xai-oauth= to set more parameters.
+
+You can pick this backend from the menu when using gptel. (see [[#usage][Usage]]).
+
+***** (Optional) Set as the default gptel backend
+
+The above makes the backend available to select.  If you want it to be the default backend for gptel, you can set this as the value of =gptel-backend=.  Use this instead of the above:
+
+#+begin_src emacs-lisp
+(setq gptel-model 'grok-4.5
+      gptel-backend (gptel-make-xai-oauth "SuperGrok"))
+#+end_src
+
+#+html: </details>
+#+html: <details><summary>
 **** AI/ML API
 #+html: </summary>
 
@@ -1326,6 +1355,7 @@ gptel provides a few powerful, general purpose and flexible commands.  You can d
 |----------------------------+-------------------------------------------------------------------------------------------|
 | =gptel-gh-login=           | Authenticate with GitHub Copilot. (Automatically handled, but can be forced if required.) |
 | =gptel-openai-oauth-login= | Authenticate with OpenAI (Codex). (Automatically handled, but can be forced if required.) |
+| =gptel-xai-oauth-login=    | Authenticate with xAI (SuperGrok). (Automatically handled, but can be forced if required.) |
 |----------------------------+-------------------------------------------------------------------------------------------|
 
 *** In any buffer:

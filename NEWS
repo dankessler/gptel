@@ -85,6 +85,12 @@
   endpoint without an API key.  See =gptel-make-openai-oauth= and the
   README for details.
 
+- xAI subscription support: gptel now supports authentication with
+  SuperGrok/X Premium subscriptions that include Grok access, using
+  either a browser-based OAuth flow or a headless device-code flow.
+  This allows using Grok without an xAI API key.  See
+  =gptel-make-xai-oauth= and the README for details.
+
 - When running ~gptel-rewrite~, reasoning text was previously always
   completely omitted from the response.  This was required to avoid
   mixing with the final, rewritten text, but it meant there was no way
