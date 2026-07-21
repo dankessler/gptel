@@ -348,10 +348,17 @@ registering an OAuth backend:
 (gptel-make-xai-oauth "SuperGrok") ; Any name of your choosing
 #+end_src
 
-The first request opens xAI's login page in your browser and stores the OAuth
-token under =user-emacs-directory=.  You can also authenticate explicitly with
-=M-x gptel-xai-oauth-login=.  The browser must be running on the same machine as
-Emacs so that it can reach the temporary localhost callback.
+The first request opens xAI's login page in your browser.  By default, the OAuth
+access token, refresh token, and expiry are stored in
+=.cache/gptel-xai/xai-oauth-token= under =user-emacs-directory= (typically
+=~/.emacs.d/.cache/gptel-xai/xai-oauth-token=).  Customize
+=gptel-xai-oauth-token-file= to use another location.
+
+You can authenticate explicitly with =M-x gptel-xai-oauth-login= and delete the
+locally stored credentials with =M-x gptel-xai-oauth-logout=.  Logging out does
+not revoke the grant at xAI; the next request starts a new login.  The browser
+must be running on the same machine as Emacs so that it can reach the temporary
+localhost callback.
 
 To make it the default backend, use:
 
@@ -1350,7 +1357,8 @@ gptel provides a few powerful, general purpose and flexible commands.  You can d
 |----------------------------+-------------------------------------------------------------------------------------------|
 | =gptel-gh-login=           | Authenticate with GitHub Copilot. (Automatically handled, but can be forced if required.) |
 | =gptel-openai-oauth-login= | Authenticate with OpenAI (Codex). (Automatically handled, but can be forced if required.) |
-| =gptel-xai-oauth-login= | Authenticate with xAI (SuperGrok). (Automatically handled, but can be forced if required.) |
+| =gptel-xai-oauth-login=  | Authenticate with xAI (SuperGrok). (Automatically handled, but can be forced if required.) |
+| =gptel-xai-oauth-logout= | Delete locally stored xAI (SuperGrok) OAuth credentials.                                  |
 |----------------------------+-------------------------------------------------------------------------------------------|
 
 *** In any buffer:

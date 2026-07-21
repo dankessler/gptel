@@ -21,9 +21,14 @@
 (defconst gptel--xai-oauth-authorize-url "https://accounts.x.ai/oauth2/auth")
 (defconst gptel--xai-oauth-token-url "https://accounts.x.ai/oauth2/token")
 
-(defvar gptel--xai-oauth-token-file
+(defcustom gptel-xai-oauth-token-file
   (expand-file-name ".cache/gptel-xai/xai-oauth-token"
-                    user-emacs-directory))
+                    user-emacs-directory)
+  "File in which to store the SuperGrok OAuth token.
+
+The file contains the access token, refresh token, and expiry time."
+  :type 'file
+  :group 'gptel)
 
 (defconst gptel--xai-oauth-redirect-port 1455)
 (defconst gptel--xai-oauth-redirect-path "/auth/callback")
@@ -148,18 +153,22 @@ OLD-REFRESH-TOKEN is retained when a refresh response does not rotate it."
     (let ((token (list :expires_at (+ (float-time) expires-in)
                        :access_token access-token
                        :refresh_token refresh-token)))
-      (gptel-oauth--write-token gptel--xai-oauth-token-file token)
+      (gptel-oauth--write-token gptel-xai-oauth-token-file token)
       (setf (gptel-xai-oauth-token backend) token)
       token-plist)))
 
+(defun gptel--xai-oauth-default-backend ()
+  "Return the current or first registered SuperGrok OAuth backend."
+  (cond
+   ((gptel-xai-oauth-p gptel-backend) gptel-backend)
+   ((cdr (cl-find-if #'gptel-xai-oauth-p gptel--known-backends
+                     :key #'cdr)))
+   (t (user-error "No SuperGrok OAuth backend found; create one with `gptel-make-xai-oauth'"))))
+
 (defun gptel-xai-oauth-login (&optional backend)
   "Authenticate a SuperGrok OAuth BACKEND using authorization code and PKCE."
-  (interactive)
-  (unless backend
-    (setq backend
-          (if (gptel-xai-oauth-p gptel-backend) gptel-backend
-            (cdr (cl-find-if #'gptel-xai-oauth-p gptel--known-backends
-                             :key #'cdr)))))
+  (interactive (list (gptel--xai-oauth-default-backend)))
+  (unless backend (setq backend (gptel--xai-oauth-default-backend)))
   (unless (gptel-xai-oauth-p backend)
     (user-error "No SuperGrok OAuth backend found; create one with `gptel-make-xai-oauth'"))
   (let* ((redirect-uri (format "http://localhost:%d%s"
@@ -184,6 +193,23 @@ OLD-REFRESH-TOKEN is retained when a refresh response does not rotate it."
       (when (called-interactively-p 'interactive)
         (message "Successfully logged in with SuperGrok.")))))
 
+(defun gptel-xai-oauth-logout ()
+  "Log out of SuperGrok by deleting locally stored OAuth credentials.
+
+Clear the token from every registered SuperGrok backend as all such backends
+share `gptel-xai-oauth-token-file'.  This does not revoke the OAuth grant at
+xAI; a later request will start a new login."
+  (interactive)
+  (when (file-exists-p gptel-xai-oauth-token-file)
+    (delete-file gptel-xai-oauth-token-file))
+  (when (gptel-xai-oauth-p gptel-backend)
+    (setf (gptel-xai-oauth-token gptel-backend) nil))
+  (cl-loop for (_name . backend) in gptel--known-backends
+           when (gptel-xai-oauth-p backend)
+           do (setf (gptel-xai-oauth-token backend) nil))
+  (when (called-interactively-p 'interactive)
+    (message "Logged out of SuperGrok; local OAuth credentials deleted.")))
+
 (defun gptel--xai-oauth-refresh (backend refresh-token)
   "Refresh BACKEND using REFRESH-TOKEN."
   (gptel--xai-oauth-persist
@@ -200,7 +226,7 @@ OLD-REFRESH-TOKEN is retained when a refresh response does not rotate it."
 (defun gptel--xai-oauth-ensure (backend)
   "Restore or obtain a valid OAuth token for BACKEND."
   (unless (gptel-xai-oauth-token backend)
-    (if-let* ((token (gptel-oauth--read-token gptel--xai-oauth-token-file)))
+    (if-let* ((token (gptel-oauth--read-token gptel-xai-oauth-token-file)))
         (setf (gptel-xai-oauth-token backend) token)
       (gptel-xai-oauth-login backend)))
   (let ((token (gptel-xai-oauth-token backend)))
