@@ -338,6 +338,21 @@ The above makes the backend available to select.  If you want it to be the defau
 
 #+html: </details>
 #+html: <details><summary>
+**** xAI / SuperGrok (OAuth)
+#+html: </summary>
+
+Includes access to Grok models using a SuperGrok or X Premium+ subscription. Register a backend with
+
+#+begin_src emacs-lisp
+(gptel-make-xai-oauth "xAI-sub") ;Any name of your choosing
+#+end_src
+
+You will be prompted to log into xAI as required.  (You can also log in manually with =M-x gptel-xai-oauth-login=.)
+
+Refer to the documentation of =gptel-make-xai-oauth= to set more parameters.
+
+#+html: </details>
+#+html: <details><summary>
 **** Azure
 #+html: </summary>
 
@@ -1326,6 +1341,7 @@ gptel provides a few powerful, general purpose and flexible commands.  You can d
 |----------------------------+-------------------------------------------------------------------------------------------|
 | =gptel-gh-login=           | Authenticate with GitHub Copilot. (Automatically handled, but can be forced if required.) |
 | =gptel-openai-oauth-login= | Authenticate with OpenAI (Codex). (Automatically handled, but can be forced if required.) |
+| =gptel-xai-oauth-login=    | Authenticate with xAI (SuperGrok). (Automatically handled, but can be forced if required.) |
 |----------------------------+-------------------------------------------------------------------------------------------|
 
 *** In any buffer:
